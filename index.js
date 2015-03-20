@@ -40,7 +40,12 @@ module.exports = function(commands, options) {
 
   function runCommand(command, next, cb) {
     var opts = options ? options : {}
-    var cordova = spawn('cordova', command)
+    var spawnOpts = {}
+    if (options.cwd) {
+      spawnOpts.cwd = options.cwd
+    }
+
+    var cordova = spawn('cordova', command, spawnOpts)
 
     if (!opts.silent) {
       gutil.log('[gulp-cordovacli]', 'Running command:', chalk.magenta('cordova'), chalk.cyan(command.join(' ')))
