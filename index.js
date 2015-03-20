@@ -68,5 +68,9 @@ module.exports = function(commands, options) {
     })
   }
 
-  return map(cordova)
+  result = map(cordova)
+  result.run = function() {
+    this.write();
+  }
+  return result;
 }
