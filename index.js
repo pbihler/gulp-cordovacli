@@ -43,6 +43,11 @@ module.exports = function(commands, options) {
     var spawnOpts = {}
     if (options.cwd) {
       spawnOpts.cwd = options.cwd
+      spawnOpts.env = {}
+      for (var k in process.env) {
+        spawnOpts.env[k] = process.env[k]
+      }
+      spawnOpts.env.PWD = options.cwd
     }
 
     var cordova = spawn('cordova', command, spawnOpts)
